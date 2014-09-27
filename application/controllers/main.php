@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Main extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,7 +21,18 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+	public function shareInformationController(){
+		$this->load->model('db_model');
+
+		$data['title'] = 'Wealth Management Automated Report';
+		$data['page_header'] = 'Share Information';
+		$types = $this->db_model->getTypes();
+		foreach($types as $t){
+
+		}
+	}
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file main.php */
+/* Location: ./application/controllers/main.php */

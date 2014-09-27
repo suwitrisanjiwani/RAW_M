@@ -99,7 +99,66 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Share Information</h1>
-                        <div id="container" style="width: 510px; float:left; height: 320px; margin: 0 auto"></div>
+                    
+    <script type="text/javascript" src="<?php FCPATH ?>public/jquery-1.11.1.min.js"></script>
+    
+    <script type="text/javascript">
+    $(function () {
+    $('#container').highcharts({
+        
+        title: {
+            text: 'Share Information',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Mandiri Wealth Management Report',
+            x: -20
+        },
+        xAxis: {
+            // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',]
+            categories: [
+            <?php 
+                foreach($percentage_bmri as $pbmri){
+                echo "'".$pbmri['date']."'".","; }?>
+            ]
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage (%)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'BMRI',
+            data: [
+            <?php 
+                foreach($percentage_bmri as $pbmri){
+                echo $pbmri['percentage'].","; }?>
+            ]
+        }, {
+            name: 'JCI',
+            data: [
+            <?php 
+                foreach($percentage_jci as $pjci){
+                echo $pjci['percentage'].","; }?>
+            ]
+        }]
+    });
+});
+</script>
+    <script type="text/javascript" src="<?php FCPATH ?>public/highcharts/js/highcharts.js"></script>
+    <script type="text/javascript" src="<?php FCPATH ?>public/highcharts/js/modules/exporting.js"></script>
+                    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                 </div>
             </div>
         </div>
@@ -182,68 +241,16 @@
         </div>
     </section>
     
-    <!-- jQuery Version 1.11.1 -->
-    <script type="text/javascript" src="<?php FCPATH ?>public/jquery-1.11.1.min.js"></script>
-    
+    <!-- jQuery Version 1.11.0 -->
+    <script src="<?php FCPATH ?>public/scrolling-nav/js/jquery-1.11.0.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php FCPATH ?>public/scrolling-nav/js/bootstrap.min.js"></script>
 
     <!-- Scrolling Nav JavaScript -->
     <script src="<?php FCPATH ?>public/scrolling-nav/js/jquery.easing.min.js"></script>
     <script src="<?php FCPATH ?>public/scrolling-nav/js/scrolling-nav.js"></script>
-    <script type="text/javascript">
-    $(function () {
-    $('#container').highcharts({
-        
-        title: {
-            text: 'Mandiri Wealth Management Report',
-            x: -20 //center
-        },
-        xAxis: {
-            // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',]
-            categories: [
-            <?php 
-                foreach($percentage_bmri as $pbmri){
-                echo "'".$pbmri['date']."'".","; }?>
-            ]
-        },
-        yAxis: {
-            title: {
-                text: 'Percentage (%)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'BMRI',
-            data: [
-            <?php 
-                foreach($percentage_bmri as $pbmri){
-                echo $pbmri['percentage'].","; }?>
-            ]
-        }, {
-            name: 'JCI',
-            data: [
-            <?php 
-                foreach($percentage_jci as $pjci){
-                echo $pjci['percentage'].","; }?>
-            ]
-        }]
-    });
-});
-</script>
-    <script type="text/javascript" src="<?php FCPATH ?>public/highcharts/js/highcharts.js"></script>
-    <script type="text/javascript" src="<?php FCPATH ?>public/highcharts/js/modules/exporting.js"></script>
-    
+
 </body>
 
 </html>

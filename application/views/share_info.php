@@ -16,11 +16,12 @@
             x: -20
         },
         xAxis: {
-            // categories: [
-            // <?php 
-            //     foreach($percentage_bmri as $pbmri){
-            //     echo $pbmri['date']; }?>
-            // ]
+            // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',]
+            categories: [
+            <?php 
+                foreach($percentage_bmri as $pbmri){
+                echo "'".$pbmri['date']."'".","; }?>
+            ]
         },
         yAxis: {
             title: {

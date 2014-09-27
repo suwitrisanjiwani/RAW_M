@@ -7,8 +7,14 @@ class Db_model extends CI_Model {
 		parent::__construct(); //call the model constructor
 	}
 
-	function getTypes(){
-		$sql = "SELECT id FROM type_kind";
+	function getPercentageJCI(){
+		$sql = "SELECT * FROM percentage_JCI";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
+	function getPercentageBMRI(){
+		$sql = "SELECT * FROM percentage_BMRI";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

@@ -19,7 +19,7 @@ class Main extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->shareInformationController();
 	}
 
 	public function shareInformationController(){
@@ -27,10 +27,9 @@ class Main extends CI_Controller {
 
 		$data['title'] = 'Wealth Management Automated Report';
 		$data['page_header'] = 'Share Information';
-		$types = $this->db_model->getTypes();
-		foreach($types as $t){
-
-		}
+		$data['percentage_bmri'] = $this->db_model->getPercentageBMRI();
+		$data['percentage_jci'] = $this->db_model->getPercentageJCI();
+		$this->load->view('share_info',$data);
 	}
 }
 

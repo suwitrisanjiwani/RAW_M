@@ -31,6 +31,7 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+       
         <div class="container">
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -50,28 +51,28 @@
                         <a class="page-scroll" href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">Share Information</a>
+                        <a class="page-scroll" href="#about"><strong>Share Information</strong></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Early Signs</a>
+                        <a class="page-scroll" href="#services"><strong>Early Signs</strong></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Key Indicators</a>
+                        <a class="page-scroll" href="#contact"><strong>Key Indicators</strong></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#Test">Key Financial Highlights</a>
+                        <a class="page-scroll" href="#Test"><strong>Key Financial Highlights</strong></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#BalancedEarning">Balanced Earnings</a>
+                        <a class="page-scroll" href="#BalancedEarning"><strong>Balanced Earnings</strong></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#SRG">Strong Revenue Growth</a>
+                        <a class="page-scroll" href="#SRG"><strong>Strong Revenue Growth</strong></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#increadingcasa">Increading CASA</a>
+                        <a class="page-scroll" href="#increadingcasa"><strong>Increading CASA</strong></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#BOH">Building Our High</a>
+                        <a class="page-scroll" href="#BOH"><strong>Building Our High</strong></a>
                     </li>
                 </ul>
             </div>
@@ -98,8 +99,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Share Information</h1>
-                        <div id="container" style="width: 510px; float:left; height: 320px; margin: 0 auto"></div>
+                    <h2>Share Information</h2>
+
+                        
+
+                        <div id="share_info" style="width: 510px; float:left; height: 290px; margin: 0 auto"></div>
+                        <div id="share_info_table" style="width: 510px; float:right; height: 0px; margin: 0 auto"></div>
+                        <div class ="search-wrapper">
+                        <form>
+                        <input type ="text" name="focus" required class="search-box" placeholder="Search data"/>
+                        <input type ="text" name="focus" required class="search-box" placeholder="Search data"/>
+                        </form>
+                        </div>    
+                        
                 </div>
             </div>
         </div>
@@ -191,55 +203,98 @@
     <!-- Scrolling Nav JavaScript -->
     <script src="<?php FCPATH ?>public/scrolling-nav/js/jquery.easing.min.js"></script>
     <script src="<?php FCPATH ?>public/scrolling-nav/js/scrolling-nav.js"></script>
+    <script>
+        function generateShareTable(){
+            var table = "<table border=1><tr><th>Description</th><th>No. of Investor</th><th>%</th><th>No. of Shares</th><th>%</th>";
+            table = table.concat("<tr><td><b>Domestic</b></td><td></td><td></td><td></td><td></td></tr>");
+            <?php 
+                $invTotalDom = 0;
+                $invPTotalDom = 0.0;
+                $shaTotalDom = 0;
+                $shaPTotalDom = 0.0;
+                foreach($share_information as $si){ 
+                    if ($si['id_location'] == 1){ ?>
+                        table = table.concat("<tr><td>"+ <?php echo "'".$si['name']."'" ?> +"</td><td>"+ <?php echo "'".number_format($si['investor'])."'" ?> +"</td><td>"+ <?php echo "'".$si['pinvestor']."'" ?> +"</td><td>"+ <?php echo "'".number_format($si['shares'])."'" ?> +"</td><td>"+ <?php echo "'".$si['pshares']."'" ?> +"</td></tr>");
+                <?php 
+                    $invTotalDom = $invTotalDom+$si['investor']; 
+                    $invPTotalDom = $invPTotalDom+$si['pinvestor']; 
+                    $shaTotalDom = $shaTotalDom+$si['shares']; 
+                    $shaPTotalDom = $shaPTotalDom+$si['pshares'];
+                 } } ?>
+                table = table.concat("<tr><td>Total</td><td>"+<?php echo "'".number_format($invTotalDom)."'" ?>+"</td><td>"+<?php echo "'".$invPTotalDom."'" ?>+"</td><td>"+<?php echo "'".number_format($shaTotalDom)."'" ?>+"</td><td>"+<?php echo "'".$shaPTotalDom."'" ?>+"</td></tr>");
+            table = table.concat("<tr><td><b>International</b></td><td></td><td></td><td></td><td></td></tr>")
+            <?php 
+                $invTotalInt = 0;
+                $invPTotalInt = 0.0;
+                $shaTotalInt = 0;
+                $shaPTotalInt = 0.0;
+                foreach($share_information as $si){ 
+                    if ($si['id_location'] == 2){ ?>
+                        table = table.concat("<tr><td>"+ <?php echo "'".$si['name']."'" ?> +"</td><td>"+ <?php echo "'".number_format($si['investor'])."'" ?> +"</td><td>"+ <?php echo "'".$si['pinvestor']."'" ?> +"</td><td>"+ <?php echo "'".number_format($si['shares'])."'" ?> +"</td><td>"+ <?php echo "'".$si['pshares']."'" ?> +"</td></tr>");
+                <?php 
+                    $invTotalInt += $si['investor']; 
+                    $invPTotalInt += $si['pinvestor']; 
+                    $shaTotalInt += $si['shares']; 
+                    $shaPTotalInt += $si['pshares'];
+                } } ?>
+                table = table.concat("<tr><td>Total</td><td>"+<?php echo "'".number_format($invTotalInt)."'" ?>+"</td><td>"+<?php echo "'".$invPTotalInt."'" ?>+"</td><td>"+<?php echo "'".number_format($shaTotalInt)."'" ?>+"</td><td>"+<?php echo "'".$shaPTotalInt."'" ?>+"</td></tr>");
+                table = table.concat("<tr><td><b>TOTAL</b></td><td>"+<?php echo "'".number_format($invTotalDom+$invTotalInt)."'" ?>+"</td><td>"+<?php echo "'".($invPTotalDom+$invPTotalInt)."'" ?>+"</td><td>"+<?php echo "'".number_format($shaTotalDom+$shaTotalInt)."'" ?>+"</td><td>"+<?php echo "'".($shaPTotalDom+$shaPTotalInt)."'" ?>+"</td></tr>");
+            
+            table = table.concat("</table>");
+            return table;
+        }
+        document.getElementById("share_info_table").innerHTML = generateShareTable();
+    </script>
+
     <script type="text/javascript">
-    $(function () {
-    $('#container').highcharts({
-        
-        title: {
-            text: 'Mandiri Wealth Management Report',
-            x: -20 //center
-        },
-        xAxis: {
-            // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',]
-            categories: [
-            <?php 
-                foreach($percentage_bmri as $pbmri){
-                echo "'".$pbmri['date']."'".","; }?>
-            ]
-        },
-        yAxis: {
+        $(function () {
+        $('#share_info').highcharts({
+            
             title: {
-                text: 'Percentage (%)'
+                text: 'Mandiri Wealth Management Report',
+                x: -20 //center
             },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
+            xAxis: {
+                //categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',]
+                categories: [
+                    <?php 
+                    foreach($percentage_bmri as $pbmri){
+                    echo "'".$pbmri['date']."'".","; }?>
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'Percentage (%)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'BMRI',
+                data: [
+                <?php 
+                    foreach($percentage_bmri as $pbmri){
+                    echo $pbmri['percentage'].","; }?>
+                ]
+            }, {
+                name: 'JCI',
+                data: [
+                <?php 
+                    foreach($percentage_jci as $pjci){
+                    echo $pjci['percentage'].","; }?>
+                ]
             }]
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'BMRI',
-            data: [
-            <?php 
-                foreach($percentage_bmri as $pbmri){
-                echo $pbmri['percentage'].","; }?>
-            ]
-        }, {
-            name: 'JCI',
-            data: [
-            <?php 
-                foreach($percentage_jci as $pjci){
-                echo $pjci['percentage'].","; }?>
-            ]
-        }]
+        });
     });
-});
 </script>
     <script type="text/javascript" src="<?php FCPATH ?>public/highcharts/js/highcharts.js"></script>
     <script type="text/javascript" src="<?php FCPATH ?>public/highcharts/js/modules/exporting.js"></script>

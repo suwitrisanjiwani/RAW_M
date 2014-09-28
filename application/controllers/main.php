@@ -29,6 +29,7 @@ class Main extends CI_Controller {
 		$data['page_header'] = 'Share Information';
 		$data['percentage_bmri'] = $this->db_model->getPercentageBMRI();
 		$data['percentage_jci'] = $this->db_model->getPercentageJCI();
+		$data['share_information'] = $this->db_model->getShareInformation();
 		$this->load->view('share_info',$data);
 	}
 }

@@ -7,8 +7,14 @@ class Db_model extends CI_Model {
 		parent::__construct(); //call the model constructor
 	}
 
+	function getShareInformation(){
+		$sql = "SELECT * from shareinformation";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
 	function getPercentageJCI(){
-		$sql = "SELECT * FROM percentage_JCI";
+		$sql = "SELECT percentage FROM percentage_JCI";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
